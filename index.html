@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Isabela Cestari · Portfólio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       TOKENS & RESET
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #FAF8F3;
+      --white:      #FFFFFF;
+      --blush:      #F5EFE8;
+      --sage:       #3D6B5A;
+      --sage-light: #6A9E89;
+      --sage-pale:  #D4E8DF;
+      --terracotta: #C4724A;
+      --terra-pale: #F5E0D5;
+      --ink:        #1C1C2E;
+      --ink-soft:   #5A5A72;
+      --border:     #E4DDD4;
+      --shadow:     0 4px 28px rgba(28,28,46,.08);
+      --shadow-lg:  0 16px 56px rgba(28,28,46,.13);
+      --r:          16px;
+      --r-sm:       8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 99px; }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 52px;
+      background: rgba(250,248,243,.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    nav.scrolled {
+      border-color: var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--sage);
+      letter-spacing: .02em;
+    }
+
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      font-size: .85rem; font-weight: 500; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--ink-soft);
+      text-decoration: none; transition: color .2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 2px; background: var(--terracotta);
+      transform: scaleX(0); transition: transform .25s;
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* burger */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .burger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .3s; }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 52px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative geometric bg */
+    #hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 620px; height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, var(--sage-pale) 0%, transparent 70%);
+      opacity: .7;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: 10%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--terra-pale) 0%, transparent 70%);
+      opacity: .6;
+    }
+
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 64px; align-items: center; position: relative; z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem; letter-spacing: .12em;
+      color: var(--terracotta); text-transform: uppercase;
+      background: var(--terra-pale); border: 1px solid #E8C4B4;
+      border-radius: 99px; padding: 6px 14px; margin-bottom: 20px;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.08; font-weight: 700;
+      color: var(--ink); margin-bottom: 12px;
+    }
+    .hero-name em {
+      font-style: italic; color: var(--sage);
+    }
+
+    .hero-role {
+      font-size: 1.15rem; font-weight: 400;
+      color: var(--ink-soft); margin-bottom: 28px;
+      letter-spacing: .01em;
+    }
+
+    .hero-desc {
+      font-size: 1rem; color: var(--ink-soft);
+      max-width: 520px; margin-bottom: 40px;
+      line-height: 1.75;
+    }
+
+    .hero-ctas {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 99px;
+      font-size: .9rem; font-weight: 500; text-decoration: none;
+      cursor: pointer; border: none; transition: all .22s;
+    }
+    .btn-primary {
+      background: var(--sage); color: #fff;
+      box-shadow: 0 4px 16px rgba(61,107,90,.28);
+    }
+    .btn-primary:hover {
+      background: #2e5547; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(61,107,90,.35);
+    }
+    .btn-outline {
+      background: transparent; color: var(--sage);
+      border: 1.5px solid var(--sage);
+    }
+    .btn-outline:hover {
+      background: var(--sage); color: #fff; transform: translateY(-2px);
+    }
+
+    /* avatar blob */
+    .hero-avatar-wrap {
+      position: relative; flex-shrink: 0;
+    }
+    .hero-blob {
+      width: 280px; height: 320px;
+      background: linear-gradient(135deg, var(--sage-pale) 0%, var(--terra-pale) 100%);
+      border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem;
+      position: relative;
+      animation: morph 8s ease-in-out infinite;
+      box-shadow: var(--shadow-lg);
+    }
+    @keyframes morph {
+      0%,100% { border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%; }
+      33%      { border-radius: 45% 55% 40% 60% / 55% 45% 55% 45%; }
+      66%      { border-radius: 55% 45% 60% 40% / 45% 60% 40% 55%; }
+    }
+
+    .hero-location {
+      position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 99px; padding: 6px 16px;
+      font-size: .78rem; color: var(--ink-soft);
+      white-space: nowrap; box-shadow: var(--shadow);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTIONS SHARED
+    ═══════════════════════════════════════════ */
+    section { padding: 96px 52px; }
+    section:nth-child(even) { background: var(--white); }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--terracotta);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 700; color: var(--ink);
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block; margin-top: 14px;
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--sage), var(--terracotta));
+      border-radius: 2px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SOBRE
+    ═══════════════════════════════════════════ */
+    #sobre .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: start;
+    }
+
+    .about-text p {
+      color: var(--ink-soft); font-size: 1.02rem;
+      margin-bottom: 18px; line-height: 1.8;
+    }
+
+    .about-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .info-card {
+      background: var(--blush); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 22px 20px;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .info-card:hover {
+      transform: translateY(-4px); box-shadow: var(--shadow);
+    }
+    .info-card .ic-icon {
+      font-size: 1.7rem; margin-bottom: 10px;
+    }
+    .info-card .ic-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-soft); margin-bottom: 4px;
+    }
+    .info-card .ic-value {
+      font-size: .95rem; font-weight: 600; color: var(--ink);
+    }
+
+    /* ═══════════════════════════════════════════
+       EDUCAÇÃO
+    ═══════════════════════════════════════════ */
+    #educacao .edu-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .edu-card {
+      background: var(--white);
+      border: 1px solid var(--border); border-radius: var(--r);
+      padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .edu-card:hover {
+      transform: translateY(-6px); box-shadow: var(--shadow-lg);
+    }
+    .edu-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .edu-card.color-a::before { background: linear-gradient(90deg, var(--sage), var(--sage-light)); }
+    .edu-card.color-b::before { background: linear-gradient(90deg, var(--terracotta), #e09070); }
+    .edu-card.color-c::before { background: linear-gradient(90deg, #7B6FA0, #A096C8); }
+    .edu-card.color-d::before { background: linear-gradient(90deg, #C4A24A, #E0CC88); }
+
+    .edu-icon { font-size: 2rem; margin-bottom: 16px; }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 6px;
+    }
+    .edu-inst {
+      font-size: .88rem; color: var(--sage);
+      font-weight: 600; margin-bottom: 4px;
+    }
+    .edu-status {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 99px;
+      margin-top: 12px;
+    }
+    .edu-status.cursando {
+      background: var(--sage-pale); color: var(--sage);
+    }
+    .edu-status.concluido {
+      background: var(--terra-pale); color: var(--terracotta);
+    }
+
+    /* ═══════════════════════════════════════════
+       EXPERIÊNCIAS
+    ═══════════════════════════════════════════ */
+    #experiencias .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    #experiencias .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 12px; bottom: 12px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--sage), var(--terracotta));
+      border-radius: 2px;
+    }
+
+    .exp-item {
+      position: relative;
+      margin-bottom: 52px;
+    }
+    .exp-item:last-child { margin-bottom: 0; }
+
+    .exp-dot {
+      position: absolute; left: -47px; top: 14px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--white); border: 3px solid var(--sage);
+      transition: border-color .2s, transform .2s;
+    }
+    .exp-item:hover .exp-dot {
+      border-color: var(--terracotta);
+      transform: scale(1.2);
+    }
+
+    .exp-card {
+      background: var(--blush); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 32px 30px;
+      transition: box-shadow .22s;
+    }
+    .exp-item:hover .exp-card { box-shadow: var(--shadow); }
+
+    .exp-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 8px;
+    }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--ink);
+    }
+    .exp-company {
+      font-size: .9rem; font-weight: 600; color: var(--sage);
+      margin-bottom: 16px;
+    }
+    .exp-tasks {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+    }
+    .exp-tasks li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .93rem; color: var(--ink-soft); line-height: 1.6;
+    }
+    .exp-tasks li::before {
+      content: '▸';
+      color: var(--terracotta); flex-shrink: 0; margin-top: 1px;
+      font-size: .8rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       HABILIDADES
+    ═══════════════════════════════════════════ */
+    #habilidades .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .skill-group {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 32px 28px;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .skill-group:hover {
+      transform: translateY(-4px); box-shadow: var(--shadow);
+    }
+
+    .sg-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px;
+    }
+    .sg-icon {
+      width: 44px; height: 44px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .sg-icon.green  { background: var(--sage-pale); }
+    .sg-icon.terra  { background: var(--terra-pale); }
+    .sg-icon.purple { background: #EDE9F7; }
+
+    .sg-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700; color: var(--ink);
+    }
+
+    .skill-item { margin-bottom: 16px; }
+    .skill-item:last-child { margin-bottom: 0; }
+
+    .skill-meta {
+      display: flex; justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .skill-name {
+      font-size: .88rem; font-weight: 500; color: var(--ink);
+    }
+    .skill-level {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem; color: var(--ink-soft);
+    }
+
+    .skill-bar {
+      height: 6px; background: var(--border);
+      border-radius: 99px; overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%; border-radius: 99px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    .fill-green  { background: linear-gradient(90deg, var(--sage), var(--sage-light)); }
+    .fill-terra  { background: linear-gradient(90deg, var(--terracotta), #e09070); }
+    .fill-purple { background: linear-gradient(90deg, #7B6FA0, #A096C8); }
+
+    /* soft skills pills */
+    .soft-pills {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
+    }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 16px; border-radius: 99px;
+      font-size: .85rem; font-weight: 500;
+      border: 1.5px solid var(--border);
+      background: var(--blush); color: var(--ink);
+      transition: all .2s;
+    }
+    .pill:hover {
+      background: var(--sage-pale); border-color: var(--sage-light);
+      color: var(--sage); transform: translateY(-2px);
+    }
+
+    /* ═══════════════════════════════════════════
+       CONTATO / FOOTER
+    ═══════════════════════════════════════════ */
+    #contato {
+      background: var(--ink);
+      color: #fff;
+      padding: 96px 52px;
+    }
+    #contato .section-label { color: var(--sage-light); }
+    #contato .section-title { color: #fff; }
+    #contato .section-title::after {
+      background: linear-gradient(90deg, var(--sage-light), var(--terracotta));
+    }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: start;
+    }
+
+    .contact-text p {
+      color: rgba(255,255,255,.65); font-size: 1rem;
+      line-height: 1.8; margin-bottom: 32px;
+    }
+
+    .contact-links {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 14px;
+      color: rgba(255,255,255,.8); text-decoration: none;
+      font-size: .95rem; transition: color .2s;
+    }
+    .contact-link:hover { color: var(--sage-light); }
+    .contact-link .cl-icon {
+      width: 40px; height: 40px; border-radius: var(--r-sm);
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+
+    footer {
+      background: #13131F; color: rgba(255,255,255,.35);
+      text-align: center; padding: 24px;
+      font-size: .8rem; font-family: 'Space Mono', monospace;
+      letter-spacing: .05em;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* stagger children */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:.05s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.15s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.25s; }
+    .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.35s; }
+    .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:.45s; }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; flex-direction: column; gap: 0;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--cream); justify-content: center; align-items: center;
+        z-index: 300;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.4rem; padding: 16px 0; }
+      .burger { display: flex; z-index: 400; }
+
+      #hero { padding: 100px 24px 64px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-avatar-wrap { order: -1; display: flex; justify-content: center; }
+      .hero-blob { width: 200px; height: 230px; font-size: 5rem; }
+
+      section { padding: 72px 24px; }
+      #sobre .about-grid { grid-template-columns: 1fr; }
+      .about-cards { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 540px) {
+      .about-cards { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     NAV
+══════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-brand">Isabela Cestari</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sobre" onclick="closeMenu()">Sobre</a></li>
+    <li><a href="#educacao" onclick="closeMenu()">Educação</a></li>
+    <li><a href="#experiencias" onclick="closeMenu()">Experiências</a></li>
+    <li><a href="#habilidades" onclick="closeMenu()">Habilidades</a></li>
+    <li><a href="#contato" onclick="closeMenu()">Contato</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-tag">✦ Portfólio Profissional</span>
+      <h1 class="hero-name">Isabela<br><em>Cestari</em></h1>
+      <p class="hero-role">Auxiliar Administrativa &amp; Logística · Estudante de TI</p>
+      <p class="hero-desc">
+        Profissional organizada, comunicativa e em transição para a área de tecnologia da informação.
+        Com experiência em rotinas administrativas, controle de planilhas e atendimento ao cliente,
+        busco unir habilidades analíticas ao universo de dados.
+      </p>
+      <div class="hero-ctas">
+        <a href="#sobre" class="btn btn-primary">Conheça meu trabalho →</a>
+        <a href="mailto:isabelacestari624@gmail.com" class="btn btn-outline">Entre em contato</a>
+      </div>
+    </div>
+
+    <div class="hero-avatar-wrap">
+      <div class="hero-blob">👩‍💻</div>
+      <div class="hero-location">📍 Marília, SP</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SOBRE
+══════════════════════════════ -->
+<section id="sobre">
+  <div class="section-inner">
+    <p class="section-label reveal">// Sobre mim</p>
+    <h2 class="section-title reveal">Quem sou eu</h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Sou a <strong>Isabela Cestari de Morais</strong>, tenho 21 anos e sou natural de Marília/SP.
+          Estou cursando <strong>Ciência da Computação</strong> na Universidade Unigrande, com foco em
+          desenvolver habilidades voltadas à tecnologia e análise de dados.
+        </p>
+        <p>
+          Minha trajetória profissional é marcada pela versatilidade: trabalhei no setor logístico da
+          <strong>DHL Supply Chain Brasil</strong>, em serviços financeiros na <strong>Paschoalotto</strong>
+          e no ambiente comercial familiar. Em todas essas experiências, o fio condutor foi a
+          <em>organização, o uso de sistemas e o trabalho com planilhas e dados</em>.
+        </p>
+        <p>
+          Meu objetivo é crescer profissionalmente na área de TI, contribuindo com responsabilidade,
+          criatividade e comprometimento — trazendo visão administrativa para o mundo dos dados.
+        </p>
+      </div>
+
+      <div class="about-cards reveal-stagger">
+        <div class="info-card">
+          <div class="ic-icon">🎂</div>
+          <div class="ic-label">Nascimento</div>
+          <div class="ic-value">31 de Janeiro de 2004</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">📍</div>
+          <div class="ic-label">Localização</div>
+          <div class="ic-value">Marília, São Paulo</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">🎓</div>
+          <div class="ic-label">Área de Estudo</div>
+          <div class="ic-value">Ciência da Computação</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">✉️</div>
+          <div class="ic-label">E-mail</div>
+          <div class="ic-value" style="font-size:.82rem; word-break:break-all;">isabelacestari624@gmail.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     EDUCAÇÃO
+══════════════════════════════ -->
+<section id="educacao">
+  <div class="section-inner">
+    <p class="section-label reveal">// Formação</p>
+    <h2 class="section-title reveal">Educação</h2>
+
+    <div class="edu-grid reveal-stagger">
+
+      <div class="edu-card color-a">
+        <div class="edu-icon">🖥️</div>
+        <div class="edu-degree">Ciência da Computação</div>
+        <div class="edu-inst">Universidade Unigrande</div>
+        <p style="font-size:.85rem; color:var(--ink-soft); margin-top:8px;">
+          Curso superior com foco em fundamentos da computação, lógica de programação,
+          banco de dados e tecnologia da informação.
+        </p>
+        <span class="edu-status cursando">Cursando</span>
+      </div>
+
+      <div class="edu-card color-b">
+        <div class="edu-icon">📊</div>
+        <div class="edu-degree">Excel Intermediário</div>
+        <div class="edu-inst">Santander Open Academy</div>
+        <p style="font-size:.85rem; color:var(--ink-soft); margin-top:8px;">
+          Formação em planilhas avançadas, fórmulas, funções de análise e
+          organização de dados para ambientes corporativos.
+        </p>
+        <span class="edu-status concluido">Concluído em 2026</span>
+      </div>
+
+      <div class="edu-card color-c">
+        <div class="edu-icon">🗂️</div>
+        <div class="edu-degree">Assistente Administrativo</div>
+        <div class="edu-inst">Unijovem Unimed</div>
+        <p style="font-size:.85rem; color:var(--ink-soft); margin-top:8px;">
+          Curso técnico de 40 horas abordando rotinas administrativas,
+          organização documental e gestão de processos operacionais.
+        </p>
+        <span class="edu-status concluido">Concluído · 40h</span>
+      </div>
+
+      <div class="edu-card color-d">
+        <div class="edu-icon">🎒</div>
+        <div class="edu-degree">Ensino Médio</div>
+        <div class="edu-inst">Colégio Compacto — Marília/SP</div>
+        <p style="font-size:.85rem; color:var(--ink-soft); margin-top:8px;">
+          Formação básica concluída, com base sólida em raciocínio lógico,
+          matemática e português.
+        </p>
+        <span class="edu-status concluido">Concluído</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     EXPERIÊNCIAS
+══════════════════════════════ -->
+<section id="experiencias">
+  <div class="section-inner">
+    <p class="section-label reveal">// Carreira</p>
+    <h2 class="section-title reveal">Experiências Profissionais</h2>
+
+    <div class="timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Auxiliar de Logística (Setor Administrativo)</div>
+              <div class="exp-company">🏢 DHL Supply Chain Brasil</div>
+            </div>
+          </div>
+          <ul class="exp-tasks">
+            <li>Apoio nas rotinas administrativas do setor logístico, garantindo fluxo contínuo das operações.</li>
+            <li>Controle e atualização de planilhas e sistemas internos com precisão e agilidade.</li>
+            <li>Organização de documentos e processos operacionais para maior eficiência da equipe.</li>
+            <li>Suporte na gestão de entrada e saída de mercadorias, com registro sistemático.</li>
+            <li>Auxílio na comunicação entre setores para otimização de processos internos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Operadora de Telesserviço</div>
+              <div class="exp-company">📞 Paschoalotto Serviços Financeiros</div>
+            </div>
+          </div>
+          <ul class="exp-tasks">
+            <li>Atendimento ativo e receptivo ao cliente, com foco em qualidade e satisfação.</li>
+            <li>Negociação de pendências financeiras com abordagem empática e orientada a resultados.</li>
+            <li>Atualização de dados em sistema, mantendo registros precisos e atualizados.</li>
+            <li>Cumprimento de metas individuais com foco em qualidade no atendimento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Vendedora</div>
+              <div class="exp-company">🔧 Auto Peças Cestari</div>
+            </div>
+          </div>
+          <ul class="exp-tasks">
+            <li>Atendimento ao cliente, esclarecendo dúvidas e auxiliando nas compras de forma consultiva.</li>
+            <li>Controle de caixa, emissão de recibos e gestão de pagamentos com responsabilidade financeira.</li>
+            <li>Agendamento de serviços e elaboração de orçamentos para clientes.</li>
+            <li>Organização de estoque e apoio administrativo geral da loja.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     HABILIDADES
+══════════════════════════════ -->
+<section id="habilidades">
+  <div class="section-inner">
+    <p class="section-label reveal">// Competências</p>
+    <h2 class="section-title reveal">Habilidades</h2>
+
+    <div class="skills-grid reveal-stagger">
+
+      <!-- Técnicas -->
+      <div class="skill-group">
+        <div class="sg-header">
+          <div class="sg-icon green">💻</div>
+          <div class="sg-title">Ferramentas &amp; Tecnologia</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Microsoft Excel</span>
+            <span class="skill-level">Intermediário</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-green" data-width="72"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Pacote Office (Word, PowerPoint)</span>
+            <span class="skill-level">Básico–Intermediário</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-green" data-width="65"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Sistemas de Gestão / ERP</span>
+            <span class="skill-level">Básico</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-green" data-width="50"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Controle de Planilhas &amp; Dados</span>
+            <span class="skill-level">Intermediário</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-green" data-width="70"></div></div>
+        </div>
+      </div>
+
+      <!-- Administrativas -->
+      <div class="skill-group">
+        <div class="sg-header">
+          <div class="sg-icon terra">📋</div>
+          <div class="sg-title">Habilidades Administrativas</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Organização de Documentos</span>
+            <span class="skill-level">Avançado</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-terra" data-width="88"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Gestão de Processos Operacionais</span>
+            <span class="skill-level">Intermediário</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-terra" data-width="72"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Controle de Estoque &amp; Logística</span>
+            <span class="skill-level">Intermediário</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-terra" data-width="68"></div></div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-meta">
+            <span class="skill-name">Negociação &amp; Atendimento ao Cliente</span>
+            <span class="skill-level">Avançado</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill fill-terra" data-width="85"></div></div>
+        </div>
+      </div>
+
+      <!-- Soft Skills -->
+      <div class="skill-group" style="grid-column: 1 / -1;">
+        <div class="sg-header">
+          <div class="sg-icon purple">✨</div>
+          <div class="sg-title">Soft Skills</div>
+        </div>
+        <div class="soft-pills">
+          <div class="pill">💬 Comunicação</div>
+          <div class="pill">🎨 Criatividade</div>
+          <div class="pill">🤝 Trabalho em Equipe</div>
+          <div class="pill">🔄 Adaptabilidade</div>
+          <div class="pill">🎯 Foco em Resultados</div>
+          <div class="pill">🗂️ Organização</div>
+          <div class="pill">⏱️ Pontualidade</div>
+          <div class="pill">📈 Comprometimento</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CONTATO
+══════════════════════════════ -->
+<section id="contato">
+  <div class="section-inner">
+    <p class="section-label reveal">// Contato</p>
+    <h2 class="section-title reveal">Vamos conversar?</h2>
+
+    <div class="contact-grid">
+      <div class="contact-text reveal">
+        <p>
+          Estou aberta a novas oportunidades, projetos e conexões profissionais.
+          Se quiser bater um papo sobre tecnologia, dados ou uma posição em aberto,
+          pode me chamar pelo e-mail abaixo!
+        </p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:isabelacestari624@gmail.com">
+            <div class="cl-icon">📧</div>
+            isabelacestari624@gmail.com
+          </a>
+          <a class="contact-link" href="#">
+            <div class="cl-icon">📍</div>
+            Marília, São Paulo — Brasil
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal" style="display:flex; align-items:center; justify-content:center;">
+        <div style="text-align:center;">
+          <div style="font-size:5rem; margin-bottom:20px; animation: morph 8s ease-in-out infinite;">🌱</div>
+          <p style="color:rgba(255,255,255,.5); font-size:.88rem; font-family:'Space Mono',monospace; letter-spacing:.05em;">
+            Em constante aprendizado
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Isabela Cestari de Morais · Feito com ♥ em Marília/SP
+</footer>
+
+<!-- ══════════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
+<script>
+  /* ── NAV scroll shadow ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ── Burger menu ── */
+  function toggleMenu() {
+    const links = document.getElementById('navLinks');
+    links.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  /* ── Scroll Reveal via IntersectionObserver ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // trigger skill bars if inside this element
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+    observer.observe(el);
+  });
+
+  /* also observe skill groups individually for bar animation */
+  document.querySelectorAll('.skill-group').forEach(el => {
+    observer.observe(el);
+  });
+
+  /* ── Active nav link on scroll ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navAs    = document.querySelectorAll('.nav-links a');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAs.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.style.color = 'var(--terracotta)';
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
+
+</body>
+</html>
